@@ -82,3 +82,10 @@ exports.updateTask = (req, res) => {
     .then(() => this.getTasks(req, res))
     .catch(err => res.status(500).send('Error creating task: ' + err.message))
 }
+exports.deleteTasks = (req, res) => {
+  connectToFirestore()
+  const { taskId } = req.params
+  db.collection('tasks').doc(taskId).delete()
+  .then(() => this.getTasks(req, res))
+  .catch(err => res.status(500).send('Error deleting task: ' + err.message))
+} 
