@@ -8,5 +8,6 @@ app.use(cors())
 
 app.get('/tasks', getTasks)
 app.post('/tasks', createTask)
+app.patch('/tasks/:taskId',updateTask)
 
 exports.app = functions.https.onRequest(app)
