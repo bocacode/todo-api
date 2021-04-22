@@ -1,7 +1,7 @@
 const functions = require("firebase-functions")
 const express = require('express')
 const cors = require('cors')
-const { getTasks, createTask, updateTask } = require('./src/tasks')
+const { getTasks, createTask, updateTask, deleteTasks } = require('./src/tasks')
 
 const app = express()
 app.use(cors())
@@ -9,5 +9,6 @@ app.use(cors())
 app.get('/tasks', getTasks)
 app.post('/tasks', createTask)
 app.patch('/tasks/:taskId',updateTask)
+app.delete('tasks/:taskId', deleteTasks)
 
 exports.app = functions.https.onRequest(app)
