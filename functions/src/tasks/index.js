@@ -88,4 +88,12 @@ exports.deleteTasks = (req, res) => {
   db.collection('tasks').doc(taskId).delete()
   .then(() => this.getTasks(req, res))
   .catch(err => res.status(500).send('Error deleting task: ' + err.message))
-} 
+}
+
+exports.getSingleTask = (req, res) => {
+  connectToFirestore()
+  const singleTask = req.params
+  db.collection('tasks').get(singleTask)
+    .then(() => this.getTasks(req, res))
+    .catch(err => res.status(500).send('Error getting single task: ' + err.message))
+}

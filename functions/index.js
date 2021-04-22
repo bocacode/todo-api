@@ -11,5 +11,6 @@ app.post('/tasks', createTask)
 app.get('/singletask', getSingleTask)
 app.patch('/tasks/:taskId',updateTask)
 app.delete('tasks/:taskId', deleteTasks)
+app.get('/singletask', getSingleTask)
 
 exports.app = functions.https.onRequest(app)
