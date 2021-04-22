@@ -36,10 +36,42 @@ exports.createTask = (req, res) => {
     .catch(err => res.status(500).send('Error creating task: ' + err.message))
 }
 
+//exports.getSingleTask = (req, res) => {
+//  connectToFirestore()
+//  const singleTask = req.params
+//  db.collection('tasks').get()
+//    .then(() => singleTask)
+//    .catch(err => res.status(500).send('Error getting single task: ' + err.message))
+//}
+
+// this one gets last task
+
 exports.getSingleTask = (req, res) => {
   connectToFirestore()
-  const singleTask = req.params
-  db.collection('tasks').get(singleTask)
-    .then(() => this.getTasks(req, res))
-    .catch(err => res.status(500).send('Error getting single task: ' + err.message))
+  db.collection('tasks').get()
+    .then(collection => {
+      let ourTasks = {}
+       collection.forEach(doc => {
+        let thisTask = doc.data()
+        ourTasks = thisTask
+      })
+      res.send(ourTasks)
+    })
+    .catch(err => res.status(500).send('Error getting this task: ' + err.message))
 }
+
+//exports.getSingleTask = (req, res) => {
+//  connectToFirestore()
+//  db.collection('tasks').get()
+//    .then(collection => {
+//      let ourTasks = {}
+//      collection.forEach(doc => {
+//        let thisTask = doc.data()
+//        thisTask.id = doc.id
+//        ourTasks = thisTask
+//      })
+//
+//      res.send(ourTasks)
+//    })
+//    .catch(err => res.status(500).send('Error getting this task: ' + err.message))
+//}
