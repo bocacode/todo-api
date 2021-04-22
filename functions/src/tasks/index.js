@@ -35,3 +35,11 @@ exports.createTask = (req, res) => {
     .then(() => this.getTasks(req, res))
     .catch(err => res.status(500).send('Error creating task: ' + err.message))
 }
+
+exports.getSingleTask = (req, res) => {
+  connectToFirestore()
+  const singleTask = req.params
+  db.collection('tasks').get(singleTask)
+    .then(() => this.getTasks(req, res))
+    .catch(err => res.status(500).send('Error getting single task: ' + err.message))
+}
