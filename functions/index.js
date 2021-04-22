@@ -8,5 +8,6 @@ app.use(cors())
 
 app.get('/tasks', getTasks)
 app.post('/tasks', createTask)
+app.get('/stupid', (req, res) => res.send('stupid'))
 
 exports.app = functions.https.onRequest(app)
