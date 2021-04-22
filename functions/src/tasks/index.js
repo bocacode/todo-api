@@ -36,6 +36,15 @@ exports.createTask = (req, res) => {
     .catch(err => res.status(500).send('Error creating task: ' + err.message))
 }
 
+exports.getSingleTask = (req, res) => {
+  connectToFirestore()
+  const { taskId } = req.params
+  db.collection('tasks')
+    .doc(taskId)
+    .get()
+    .then(singleTask => res.send(singleTask.data()))
+}
+
 exports.updateTask = (req, res) => {
   connectToFirestore()
   const taskUpdate = req.body
@@ -50,4 +59,4 @@ exports.deleteTasks = (req, res) => {
   db.collection('tasks').doc(taskId).delete()
   .then(() => this.getTasks(req, res))
   .catch(err => res.status(500).send('Error deleting task: ' + err.message))
-} 
+}
