@@ -8,6 +8,6 @@ app.use(cors())
 
 app.get('/tasks', getTasks)
 app.post('/tasks', createTask)
-app.get('/singletask', getSingleTask)
+app.get('/tasks/:taskId', getSingleTask)
 
 exports.app = functions.https.onRequest(app)
