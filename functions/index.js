@@ -1,7 +1,7 @@
 const functions = require("firebase-functions")
 const express = require('express')
 const cors = require('cors')
-const { getTasks, createTask } = require('./src/tasks')
+const { getTasks, createTask, updateTask } = require('./src/tasks')
 
 const app = express()
 app.use(cors())
